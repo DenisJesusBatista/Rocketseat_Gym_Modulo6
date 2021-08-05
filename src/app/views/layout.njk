@@ -3,24 +3,20 @@
     <head>
 
         {% block head %}
-            <title>Gym Manager</title>
+            <title>Launchstore</title>
         {% endblock %}
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="/style.css">
     </head>
-    <body>
-        <!-- Header serve para usar algo mais semântico -->
-        <header>
-            <div class="links">
-                <a href="/instructors">Instructors</a>
-                <a href="/members">Members</a>
-            </div>
+    <body>        
+       
+       {%include "parts/header.njk" %}
 
-        </header>
+        {% block content %}{%endblock%}
+        
+        {%include "parts/footer.njk" %}
 
-        {% block content %}
-            {%endblock%}
-
-            <script src="/scripts.js"></script>
+            
 
         </body>
     </html>
