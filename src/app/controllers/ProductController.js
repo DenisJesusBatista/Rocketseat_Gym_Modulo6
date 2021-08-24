@@ -1,6 +1,7 @@
 const { formatPrice } = require('../../lib/utils')
 const Category = require('../models/Category')
 const Product = require('../models/Product')
+const File = require('../models/File')
 
 
 module.exports = {
@@ -33,13 +34,26 @@ module.exports = {
             }
         }
 
+
+        if (req.files.length == 0)
+            return res.send('Please, send at least one image')
+
+
+
+
         let results = await Product.create(req.body)
         const productId = results.rows[0].id
 
-        results = await Category.all()
-        const categories = results.rows
+        const filesPromise = req.files.map(file => File.create({ ...file, product_id: productId }))
 
-        return res.redirect(`/products/${productId}`)
+        await Promise.all(filesPromise)
+
+
+
+        // results = await Category.all()
+        // const categories = results.rows
+
+        return res.redirect(`/products/${productId}/edit`)
 
     },
 
