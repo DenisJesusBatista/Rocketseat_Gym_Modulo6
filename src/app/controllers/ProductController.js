@@ -6,7 +6,7 @@ const File = require('../models/File')
 
 module.exports = {
     create(req, res) {
-        // Pegar categproas
+        // Pegar categprias
         Category.all()
             .then(function (results) {
 
@@ -28,7 +28,7 @@ module.exports = {
 
 
         for (key of keys) {
-            //requ.body.key == ""
+
             if (req.body[key] == "") {
                 return res.send("Please, fill all fields!")
             }
@@ -48,6 +48,18 @@ module.exports = {
 
         await Promise.all(filesPromise)
 
+        const get = async () => {
+            return Promise.reject('Oops"').catch(err => {
+                throw new Error(err);
+            })
+        };
+
+        get()
+            .then(console.log)
+            .catch(function (e) {
+                console.log(e);
+            });
+
 
 
         // results = await Category.all()
@@ -55,6 +67,10 @@ module.exports = {
 
         return res.redirect(`/products/${productId}/edit`)
 
+    },
+
+    show(req, res) {
+        return res.render("products/show")
     },
 
     async edit(req, res) {
